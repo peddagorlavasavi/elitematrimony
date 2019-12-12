@@ -1,4 +1,4 @@
-package com.strikers.elitematrimony.util;
+package com.strikers.elitematrimony.utils;
 
 public class ApiConstant {
     private ApiConstant(){}
@@ -6,7 +6,8 @@ public class ApiConstant {
     public static final String SUCCESS = "SUCCESSFUL";
     
 
-    
+    public static final String INTERNAL_SERVER_ERROR = "INTERNAL SERVER ERROR";
     public static final String VALIDATION_FAILED = "VALIDATION FAILED";
+    public static final String NO_ELEMENT_FOUND = "NO ELEMENT FOUND";
 }
 

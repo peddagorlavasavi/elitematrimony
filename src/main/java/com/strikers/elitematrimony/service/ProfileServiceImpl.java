@@ -17,8 +17,8 @@ import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.exception.AgeNotMatchedException;
 import com.strikers.elitematrimony.repository.CityRepository;
 import com.strikers.elitematrimony.repository.LanguageRepository;
-import com.strikers.elitematrimony.util.StringConstant;
-import com.strikers.elitematrimony.util.Utils;
+import com.strikers.elitematrimony.utils.StringConstant;
+import com.strikers.elitematrimony.utils.Utils;
 import com.strikers.elitematrimony.controller.ProfileController;
 import com.strikers.elitematrimony.repository.ProfileRepository;
 
