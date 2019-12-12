@@ -22,7 +22,7 @@ import com.strikers.elitematrimony.service.ProfileService;
  * @since 2019-12-12
  */
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/profiles")
 public class ProfileController {
 	/**
