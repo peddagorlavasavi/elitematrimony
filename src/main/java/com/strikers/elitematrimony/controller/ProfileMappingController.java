@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.strikers.elitematrimony.dto.GetStatusResponseDto;
 import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.service.ProfileMappingService;
 
@@ -33,11 +34,17 @@ public class ProfileMappingController {
 	 * @return list of persons who are interested on a particular id.
 	 */
 	@GetMapping("{profileId}/myinterest")
-	public ResponseEntity<List<Profile>> getMyInterestProfiles(@PathVariable("profileId") Integer profileId) {
-		logger.info("Got the interested list");
+	public ResponseEntity<GetStatusResponseDto> getMyInterestProfiles(@PathVariable("profileId") Integer profileId) {
+		GetStatusResponseDto getStatusResponseDto=new GetStatusResponseDto();
 		List<Profile> interestedList = profileMappingService.getMyInterestProfiles(profileId);
-		return new ResponseEntity<>(interestedList, HttpStatus.OK);
-
+		if(interestedList.isEmpty()) {
+			getStatusResponseDto.setProfileMapping(interestedList);
+			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.NOT_FOUND);
+		}else {
+			logger.info("Got the interested list");
+			getStatusResponseDto.setProfileMapping(interestedList);
+		return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
+		}
 	}
 
 	/**
@@ -47,10 +54,17 @@ public class ProfileMappingController {
 	 * @return list of persons who are accepted for a particular id.
 	 */
 	@GetMapping("{profileId}/matching")
-	public ResponseEntity<List<Profile>> getAcceptedProfiles(@PathVariable("profileId") Integer profileId) {
+	public ResponseEntity<GetStatusResponseDto> getAcceptedProfiles(@PathVariable("profileId") Integer profileId) {
 		List<Profile> acceptedList = profileMappingService.getAcceptedProfiles(profileId);
-		logger.info("Got the accepted list");
-		return new ResponseEntity<>(acceptedList, HttpStatus.OK);
+		GetStatusResponseDto getStatusResponseDto=new GetStatusResponseDto();
+		if(acceptedList.isEmpty()) {
+			getStatusResponseDto.setProfileMapping(acceptedList);
+			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.NOT_FOUND);
+		}else {
+			logger.info("Got the accepted list");
+			getStatusResponseDto.setProfileMapping(acceptedList);
+		return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
+		}
 	}
 
 	/**
