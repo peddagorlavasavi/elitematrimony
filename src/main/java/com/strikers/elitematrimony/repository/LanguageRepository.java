@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.strikers.elitematrimony.entity.Language;
 
 @Repository
-public interface LanguageRepository extends JpaRepository<Language, Integer>{
+public interface LanguageRepository extends JpaRepository<Language, Integer> {
 
 }

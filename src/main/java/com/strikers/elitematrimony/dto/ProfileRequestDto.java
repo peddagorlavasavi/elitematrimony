@@ -5,28 +5,33 @@ import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
-public class SuggestedListResponseDto implements Serializable {
+@ToString
+public class ProfileRequestDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	private String firstName;
 	private String lastName;
 	private String gender;
-	private LocalDate dob;
 	private String language;
 	private String qualification;
-	private String profession;
+	private LocalDate dob;
 	private Double monthlyIncome;
 	private String mobileNumber;
 	private String city;
 	private String hobby;
 	private String maritalStatus;
+	private String userName;
+	private String password;
+	private LocalDate createdDate;
 	private String status;
 	private String description;
-	private String email;
-	private String address;
 	private Integer age;
+	private String address;
+	private String email;
 
 }

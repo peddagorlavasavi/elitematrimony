@@ -23,7 +23,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class City {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cityId;

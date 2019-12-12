@@ -23,7 +23,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Language {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer languageId;
