@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Language is an entity class which list the languages
+ * @author Hema
+ *
+ */
 @Entity
 @Table(name = "language")
 @Setter

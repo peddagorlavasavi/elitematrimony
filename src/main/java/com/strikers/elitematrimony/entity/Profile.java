@@ -44,9 +44,9 @@ public class Profile {
 	private String status;
 	private String description;
 	private String profession;
-	private Integer age;
-	private String address;
 	private String email;
+	private String address;
+	private Integer age;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "requestedProfile")
