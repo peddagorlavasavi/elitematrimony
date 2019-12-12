@@ -29,10 +29,10 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Autowired
 	private ProfileRepository profileRepository;
-	
+
 	@Autowired
 	private LanguageRepository languageRepository;
-	
+
 	@Autowired
 	private CityRepository cityRepository;
 
@@ -47,35 +47,33 @@ public class ProfileServiceImpl implements ProfileService {
 		logger.info("inside Profile Service");
 		return profileRepository.searchProfile(searchKey);
 	}
-	
 
 	/**
-	 *@description -> this method is used to create profile.
-	 *@param profileRequestDto : which contains the fields of profile
-	 *@return profileResponseDto
-	 *@throws AgeNotMatchedException
+	 * @description -> this method is used to create profile.
+	 * @param profileRequestDto : which contains the fields of profile
+	 * @return profileResponseDto
+	 * @throws AgeNotMatchedException
 	 */
 	@Override
 	public ProfileResponseDto createProfile(ProfileRequestDto profileRequestDto) throws AgeNotMatchedException {
 		logger.info("In registerProfile() method");
 		ProfileResponseDto profileResponseDto = new ProfileResponseDto();
-
 		if (profileRequestDto != null) {
-			logger.info("" + Utils.calculateAge(profileRequestDto.getDob()));
 			if (Utils.calculateAge(profileRequestDto.getDob()) >= StringConstant.MIN_AGE) {
 				Profile profile = new Profile();
 				BeanUtils.copyProperties(profileRequestDto, profile);
-				
-				Optional<City> optionalCity= cityRepository.findById(Integer.parseInt(profileRequestDto.getCity()));
-				if(optionalCity.isPresent()) {
+
+				Optional<City> optionalCity = cityRepository.findById(Integer.parseInt(profileRequestDto.getCity()));
+				if (optionalCity.isPresent()) {
 					profile.setCity(optionalCity.get().getCityName());
 				}
-				
-				Optional<Language> optionalLanguage = languageRepository.findById(Integer.parseInt(profileRequestDto.getLanguage()));
-				if(optionalLanguage.isPresent()) {
+
+				Optional<Language> optionalLanguage = languageRepository
+						.findById(Integer.parseInt(profileRequestDto.getLanguage()));
+				if (optionalLanguage.isPresent()) {
 					profile.setLanguage(optionalLanguage.get().getLanguageName());
 				}
-				
+
 				profile = profileRepository.save(profile);
 				profileResponseDto.setProfileId(profile.getProfileId());
 				profileResponseDto.setMessage(StringConstant.SUCCESS);

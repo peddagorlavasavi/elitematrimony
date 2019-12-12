@@ -21,7 +21,7 @@ import com.strikers.elitematrimony.service.InterestedProfileService;
  * @description -> this class is used for to show interest on profile.
  */
 @RestController
-@RequestMapping("/intrestedprofiles")
+@RequestMapping("/interestedprofiles")
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 public class InterestedProfileController {
 	/**
