@@ -28,5 +28,6 @@ public class SuggestedListResponseDto implements Serializable {
 	private String email;
 	private String address;
 	private Integer age;
+	private Integer profileId;
 
 }
