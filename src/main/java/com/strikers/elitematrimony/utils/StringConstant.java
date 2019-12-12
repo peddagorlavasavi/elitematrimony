@@ -2,7 +2,7 @@ package com.strikers.elitematrimony.utils;
 
 public class StringConstant {
 
-	public StringConstant() {
+	public StringConstant() { //NOSONAR
 
 	}
 
