@@ -1,6 +1,5 @@
 package com.strikers.elitematrimony.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
