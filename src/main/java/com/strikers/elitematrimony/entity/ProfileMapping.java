@@ -36,7 +36,7 @@ public class ProfileMapping {
 	
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="intrested_profile_id")
+	@JoinColumn(name="interested_profile_id")
 	private Profile interestedProfile;
 	
 	private LocalDate requestedDate;
