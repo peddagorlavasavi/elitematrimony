@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -24,7 +23,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Profile { 
+public class Profile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer profileId;
@@ -44,17 +43,16 @@ public class Profile {
 	private LocalDate createdDate;
 	private String status;
 	private String description;
-	@Transient
 	private Integer age;
-	
+	private String address;
+	private String email;
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "requestedProfile")
 	private List<ProfileMapping> requestedProfile;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "interestedProfile")
 	private List<ProfileMapping> interestedProfiles;
-	
-	
 
 }
