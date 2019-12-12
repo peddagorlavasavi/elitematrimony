@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ import com.strikers.elitematrimony.service.InterestedProfileService;
  * @description -> this class is used for to show interest on profile.
  */
 @RestController
-@RequestMapping("/intrestedprofiles")
+@RequestMapping("/interestedprofiles")
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 public class InterestedProfileController {
 	/**
@@ -41,11 +42,13 @@ public class InterestedProfileController {
 	 * @throws MatrimonyServiceException 
 	 */
 	@PostMapping()
-	public ResponseEntity<InterestedProfileResponseDto> showInterest(InterestedProfileDto interestedProfileDto) throws MatrimonyServiceException {
+	public ResponseEntity<InterestedProfileResponseDto> showInterest(@RequestBody InterestedProfileDto interestedProfileDto) throws MatrimonyServiceException {
 		logger.info("Inside InterestedProfileController:shoeInterest");
 		InterestedProfileResponseDto interestedProfileResponseDto = interestedProfileService
 				.showInterest(interestedProfileDto);
-		return new ResponseEntity<>(interestedProfileResponseDto, HttpStatus.ACCEPTED);
-
+		if(interestedProfileResponseDto!=null)
+			return new ResponseEntity<>(interestedProfileResponseDto, HttpStatus.ACCEPTED);
+		else
+			return new ResponseEntity<>(interestedProfileResponseDto, HttpStatus.BAD_REQUEST);
 	}
 }
