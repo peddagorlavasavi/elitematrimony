@@ -43,6 +43,7 @@ public class Profile {
 	private LocalDate createdDate;
 	private String status;
 	private String description;
+	private String profession;
 	private Integer age;
 	private String address;
 	private String email;

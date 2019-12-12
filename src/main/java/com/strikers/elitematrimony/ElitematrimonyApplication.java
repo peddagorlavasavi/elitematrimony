@@ -9,5 +9,4 @@ public class ElitematrimonyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ElitematrimonyApplication.class, args);
 	}
-
 }
