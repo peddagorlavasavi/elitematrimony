@@ -49,6 +49,12 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 	
 
+	/**
+	 *@description -> this method is used to create profile.
+	 *@param profileRequestDto : which contains the fields of profile
+	 *@return profileResponseDto
+	 *@throws AgeNotMatchedException
+	 */
 	@Override
 	public ProfileResponseDto createProfile(ProfileRequestDto profileRequestDto) throws AgeNotMatchedException {
 		logger.info("In registerProfile() method");

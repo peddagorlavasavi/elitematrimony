@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.strickers.elitematrimony.utils.StringConstant;
 import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.entity.ProfileMapping;
 import com.strikers.elitematrimony.repository.ProfileMappingRepository;
 import com.strikers.elitematrimony.repository.ProfileRepository;
+import com.strikers.elitematrimony.util.StringConstant;
 
 @Service
 public class ProfileMappingServiceImpl implements ProfileMappingService {

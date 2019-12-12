@@ -16,12 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.strikers.elitematrimony.entity.ProfileMapping;
 import com.strikers.elitematrimony.service.ProfileMappingService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/profiles")
-@Slf4j
 public class ProfileMappingController {
 
 	@Autowired

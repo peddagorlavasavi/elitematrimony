@@ -36,10 +36,10 @@ public class ApiExceptionHandler {
 	 * @param ex
 	 * @return
 	 */
-	@ExceptionHandler(MobileNumberExistException.class)
+	@ExceptionHandler(MatrimonyServiceException.class)
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public ExceptionResponseDto handleMobileNumberExistException(MobileNumberExistException ex) {
+	public ExceptionResponseDto handleMobileNumberExistException(MatrimonyServiceException ex) {
 		String msg = ex.getMessage();
 		return new ExceptionResponseDto(ApiConstant.VALIDATION_FAILED, msg);
 	}
