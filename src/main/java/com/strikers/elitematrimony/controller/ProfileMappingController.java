@@ -10,9 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.strikers.elitematrimony.dto.ProfileMappingRequestDto;
 import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.service.ProfileMappingService;
 
@@ -69,4 +72,22 @@ public class ProfileMappingController {
 			return new ResponseEntity<>(acceptedList, HttpStatus.NO_CONTENT);
 		}
 	}
+	
+//	/**
+//	 * @author Sujal @since2019-12-12 This method take profileId as input and get a
+//	 *         list of persons who interested that particular id.
+//	 * @param profileId
+//	 * @return list of persons who are accepted for a particular id.
+//	 */
+//	@PostMapping("/interestedProfile")
+//	public ResponseEntity<List<Profile>> showInterest(@RequestBody ProfileMappingRequestDto profileMappingRequestDto) {
+//		Profile profile 
+//		
+//		if (acceptedList != null && !acceptedList.isEmpty()) {
+//			logger.info("Got the interested list");
+//			return new ResponseEntity<>(acceptedList, HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<>(acceptedList, HttpStatus.NO_CONTENT);
+//		}
+//	}
 }
