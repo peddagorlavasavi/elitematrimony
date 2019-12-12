@@ -1,4 +1,4 @@
-package com.strikers.elitematrimony.util;
+package com.strikers.elitematrimony.utils;
 
 import java.time.LocalDate;
 import java.util.Calendar;

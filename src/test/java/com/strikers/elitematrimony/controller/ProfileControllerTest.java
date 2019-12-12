@@ -1,9 +1,12 @@
 package com.strikers.elitematrimony.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,15 +36,10 @@ public class ProfileControllerTest {
 	 * The Constant log.
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(ProfileControllerTest.class);
-	/**
-	 * The profileController
-	 */
+
 	@InjectMocks
 	ProfileController profileController;
 
-	/**
-	 * The profileService
-	 */
 	@Mock
 	ProfileServiceImpl profileService;
 
@@ -83,5 +81,23 @@ public class ProfileControllerTest {
 		when(profileService.createProfile(profileRequestDto)).thenReturn(profileResponseDto);
 		ResponseEntity<ProfileResponseDto> result = profileController.createProfile(profileRequestDto);
 		assertEquals("profile created successfully", result.getBody().getMessage());
+		profile.setProfession("mca");
+
+	}
+
+	@Test
+	public void testSearchProfile() {
+		List<Profile> profileList = new ArrayList<>();
+		when(profileService.searchProfile("mca")).thenReturn(profileList);
+		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca");
+		assertThat(result.getBody()).hasSize(0);
+	}
+
+	@Test
+	public void testSearchProfileNegative() {
+		List<Profile> profileList = new ArrayList<>();
+		when(profileService.searchProfile("")).thenReturn(profileList);
+		ResponseEntity<List<Profile>> result = profileController.searchProfile("");
+		assertThat(result.getBody()).hasSize(0);
 	}
 }

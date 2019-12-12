@@ -12,8 +12,8 @@ import com.strikers.elitematrimony.entity.ProfileMapping;
 import com.strikers.elitematrimony.exception.MatrimonyServiceException;
 import com.strikers.elitematrimony.repository.ProfileMappingRepository;
 import com.strikers.elitematrimony.repository.ProfileRepository;
-import com.strikers.elitematrimony.util.StringConstant;
-import com.strikers.elitematrimony.util.Utils;
+import com.strikers.elitematrimony.utils.StringConstant;
+import com.strikers.elitematrimony.utils.Utils;
 
 /**
  * @author vasavi
