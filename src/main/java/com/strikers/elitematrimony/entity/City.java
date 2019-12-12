@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * City is an entity class which list the cities
+ * @author Hema
+ *
+ */
 @Entity
 @Table(name = "city")
 @Setter
