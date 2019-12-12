@@ -58,36 +58,6 @@ public class ProfileControllerTest {
 	static SuggestedListRequestDto suggestedListRequestDto = new SuggestedListRequestDto();
 	static List<SuggestedListResponseDto> suggestedListResponseDtos = new ArrayList<>();
 
-	@Before
-	public void setUp() {
-		loginRequestDto.setMobileNumber("9894803625");
-		loginRequestDto.setPassword("12");
-		loginResponseDto.setFirstName("hema");
-		loginResponseDto.setGender("Female");
-		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
-		loginResponseDto.setProfileId(1);
-		profile.setProfileId(1);
-		profile.setMobileNumber("9894803625");
-		profile.setPassword("12");
-		profiles.add(profile);
-		loginRequestDto.setMobileNumber("9894803625");
-		loginRequestDto.setPassword("12");
-		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
-		loginResponseDto.setFirstName("hema");
-		loginResponseDto.setGender("Female");
-		loginResponseDto.setProfileId(1);
-		suggestedListRequestDto.setProfileId(1);
-		suggestedListRequestDto.setGender("Female");
-		BeanUtils.copyProperties(profiles, suggestedListResponseDtos);
-	}
-
-	@Test
-	public void testUserLoginPositive() throws ProfileNotFoundException {
-		Mockito.when(profileService.userLogin(loginRequestDto)).thenReturn(loginResponseDto);
-		Integer result = profileController.userLogin(loginRequestDto).getStatusCodeValue();
-		assertEquals(200, result);
-	}
-
 	Profile profile = new Profile();
 	ProfileRequestDto profileRequestDto = new ProfileRequestDto();
 	ProfileResponseDto profileResponseDto = new ProfileResponseDto();
@@ -117,6 +87,25 @@ public class ProfileControllerTest {
 		profileResponseDto.setMessage("profile created successfully");
 		profileResponseDto.setProfileId(1);
 		profileResponseDto.setStatusCode(200);
+		loginRequestDto.setMobileNumber("9894803625");
+		loginRequestDto.setPassword("12");
+		loginResponseDto.setFirstName("hema");
+		loginResponseDto.setGender("Female");
+		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
+		loginResponseDto.setProfileId(1);
+		profile.setProfileId(1);
+		profile.setMobileNumber("9894803625");
+		profile.setPassword("12");
+		profiles.add(profile);
+		loginRequestDto.setMobileNumber("9894803625");
+		loginRequestDto.setPassword("12");
+		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
+		loginResponseDto.setFirstName("hema");
+		loginResponseDto.setGender("Female");
+		loginResponseDto.setProfileId(1);
+		suggestedListRequestDto.setProfileId(1);
+		suggestedListRequestDto.setGender("Female");
+		BeanUtils.copyProperties(profiles, suggestedListResponseDtos);
 
 	}
 
@@ -126,8 +115,14 @@ public class ProfileControllerTest {
 		when(profileService.createProfile(profileRequestDto)).thenReturn(profileResponseDto);
 		ResponseEntity<ProfileResponseDto> result = profileController.createProfile(profileRequestDto);
 		assertEquals("profile created successfully", result.getBody().getMessage());
-		profile.setProfession("mca");
 
+	}
+
+	@Test
+	public void testUserLoginPositive() throws ProfileNotFoundException {
+		Mockito.when(profileService.userLogin(loginRequestDto)).thenReturn(loginResponseDto);
+		Integer result = profileController.userLogin(loginRequestDto).getStatusCodeValue();
+		assertEquals(200, result);
 	}
 
 	@Test

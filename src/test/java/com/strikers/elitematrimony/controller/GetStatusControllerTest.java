@@ -18,7 +18,7 @@ import com.strikers.elitematrimony.entity.ProfileMapping;
 import com.strikers.elitematrimony.service.ProfileMappingService;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class getStatusControllerTest {
+public class GetStatusControllerTest {
 
 	@InjectMocks
 	ProfileMappingController profileMappingController;
@@ -39,7 +39,7 @@ public class getStatusControllerTest {
 		HttpStatus statuscode = profileMappingController.getMyInterestProfiles(1).getStatusCode();
 		assertEquals(HttpStatus.OK, statuscode);
 	}
-	
+
 	@Test
 	public void getMyInterestProfilesNegative() {
 		profile.setProfileId(2);
@@ -48,7 +48,7 @@ public class getStatusControllerTest {
 		HttpStatus statuscode = profileMappingController.getMyInterestProfiles(2).getStatusCode();
 		assertEquals(HttpStatus.NOT_FOUND, statuscode);
 	}
-	
+
 	@Test
 	public void getMyMatchingProfilesPositive() {
 		profile.setProfileId(1);
@@ -57,7 +57,7 @@ public class getStatusControllerTest {
 		HttpStatus statuscode = profileMappingController.getAcceptedProfiles(1).getStatusCode();
 		assertEquals(HttpStatus.OK, statuscode);
 	}
-	
+
 	@Test
 	public void getMyMatchingProfilesNegative() {
 		profile.setProfileId(2);
