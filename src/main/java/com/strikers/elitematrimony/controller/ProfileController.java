@@ -64,8 +64,8 @@ public class ProfileController {
 	public ResponseEntity<ProfileResponseDto> createProfile(@RequestBody ProfileRequestDto profileRequestDto)
 			throws AgeNotMatchedException {
 		logger.info("Inside ProfileController:registerProfile ");
-		ProfileResponseDto ProfileResponseDto = profileService.createProfile(profileRequestDto);
-		return new ResponseEntity<>(ProfileResponseDto, HttpStatus.CREATED);
+		ProfileResponseDto profileResponseDto = profileService.createProfile(profileRequestDto);
+		return new ResponseEntity<>(profileResponseDto, HttpStatus.CREATED);
 
 	}
 
