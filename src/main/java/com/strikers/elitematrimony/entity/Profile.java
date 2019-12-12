@@ -44,6 +44,8 @@ public class Profile {
 	private LocalDate createdDate;
 	private String status;
 	private String description;
+	private String profession;
+	
 	@Transient
 	private Integer age;
 	
