@@ -87,7 +87,7 @@ public class ProfileControllerTest {
 		Integer result = profileController.userLogin(loginRequestDto).getStatusCodeValue();
 		assertEquals(200, result);
 	}
-
+	
 	Profile profile = new Profile();
 	ProfileRequestDto profileRequestDto = new ProfileRequestDto();
 	ProfileResponseDto profileResponseDto = new ProfileResponseDto();
