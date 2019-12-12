@@ -1,7 +1,6 @@
 package com.strikers.elitematrimony.controller;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.strikers.elitematrimony.dto.ProfileRequestDto;
+import com.strikers.elitematrimony.dto.ProfileResponseDto;
+import com.strikers.elitematrimony.exception.AgeNotMatchedException;
 import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.service.ProfileService;
 
 @RestController
 @RequestMapping("/profiles")
+@CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 public class ProfileController {
 
 	@Autowired
@@ -42,4 +48,18 @@ public class ProfileController {
 		}
 	}
 
+	/**
+	 * @description -> this method is used to create profile
+	 * @param profileRequestDto
+	 * @return profileResponseDto
+	 * @throws AgeNotMatchedException
+	 */
+	@PostMapping()
+	public ResponseEntity<ProfileResponseDto> createProfile(@RequestBody ProfileRequestDto profileRequestDto)
+			throws AgeNotMatchedException {
+		logger.info("Inside ProfileController:registerProfile ");
+		ProfileResponseDto ProfileResponseDto = profileService.createProfile(profileRequestDto);
+		return new ResponseEntity<>(ProfileResponseDto, HttpStatus.CREATED);
+
+	}
 }
