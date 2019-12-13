@@ -39,7 +39,7 @@ public class ProfileMappingController {
 		logger.info(profileId+"");
 		GetStatusResponseDto getStatusResponseDto=new GetStatusResponseDto();
 		List<Profile> interestedList = profileMappingService.getMyInterestProfiles(profileId);
-		if(interestedList!=null && interestedList.isEmpty()) {
+		if(interestedList!=null && !interestedList.isEmpty()) {
 			getStatusResponseDto.setProfileMapping(interestedList);
 			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
 		}else {
@@ -59,7 +59,7 @@ public class ProfileMappingController {
 	public ResponseEntity<GetStatusResponseDto> getAcceptedProfiles(@PathVariable("profileId") Integer profileId) {
 		List<Profile> acceptedList = profileMappingService.getAcceptedProfiles(profileId);
 		GetStatusResponseDto getStatusResponseDto=new GetStatusResponseDto();
-		if(acceptedList.isEmpty()) {
+		if(!acceptedList.isEmpty()) {
 			getStatusResponseDto.setProfileMapping(acceptedList);
 			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
 		}else {
