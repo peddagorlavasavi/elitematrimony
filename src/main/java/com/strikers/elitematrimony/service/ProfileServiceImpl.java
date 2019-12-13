@@ -43,9 +43,10 @@ public class ProfileServiceImpl implements ProfileService {
 	private CityRepository cityRepository;
 
 	/**
-	 * @description This method is used to search profile based on language,
-	 *              maritalStatus, qualification, profession, hobby or city
-	 * @param searchKey is used to search the above mentioned field of profile
+	 * @description This method is used to search profile based on firstname,
+	 *              lastname, language, maritalStatus, qualification, profession,
+	 *              hobby or city
+	 * @param searchKey is used to search the above mentioned fields of profile
 	 * @return List<Profile> is the list of profile
 	 */
 	@Override
@@ -101,9 +102,9 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	/**
-	 * @author Hema 
-	 * @description -> this method is used to verify the user by getting the mobileNumber
-	 *         and password
+	 * @author Hema
+	 * @description -> this method is used to verify the user by getting the
+	 *              mobileNumber and password
 	 * @param loginRequestDto
 	 * @return LoginResponseDto
 	 * @throws ProfileNotFoundException
@@ -124,16 +125,17 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	/**
-	 * @author Hema 
-	 * @description ->  This method is used to list the profiles based on profileId and gender
+	 * @author Hema
+	 * @description -> This method is used to list the profiles based on profileId
+	 *              and gender
 	 * @param suggestedListRequestDto
 	 * @return List<SuggestedListResponseDto>
 	 */
 	@Override
 	public List<SuggestedListResponseDto> suggestedList(SuggestedListRequestDto suggestedListRequestDto) {
-		logger.info("Showing profiles based on gender "+suggestedListRequestDto.getGender());
-		List<Profile> profileList = profileRepository.getSuggestedProfiles(
-				suggestedListRequestDto.getProfileId(), suggestedListRequestDto.getGender());
+		logger.info("Showing profiles based on gender " + suggestedListRequestDto.getGender());
+		List<Profile> profileList = profileRepository.getSuggestedProfileList(suggestedListRequestDto.getProfileId(),
+				suggestedListRequestDto.getGender(), StringConstant.NOT_INTERESTED_STATUS);
 		List<SuggestedListResponseDto> suggestedListResponseDtos = new ArrayList<>();
 		profileList.forEach(profile -> {
 			SuggestedListResponseDto suggestedListResponseDto = new SuggestedListResponseDto();
