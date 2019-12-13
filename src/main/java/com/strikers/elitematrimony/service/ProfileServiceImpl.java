@@ -66,7 +66,7 @@ public class ProfileServiceImpl implements ProfileService {
 		logger.info("In registerProfile() method");
 		ProfileResponseDto profileResponseDto = new ProfileResponseDto();
 		if (profileRequestDto != null) {
-			if (Utils.calculateAge(profileRequestDto.getDob()) >= StringConstant.MIN__AGE) {
+			if (Utils.calculateAge(profileRequestDto.getDob()) >= StringConstant.MIN_AGE) {
 				Profile profile = new Profile();
 				BeanUtils.copyProperties(profileRequestDto, profile);
 				profile.setCreatedDate(Utils.getCurrentDate());

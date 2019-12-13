@@ -46,7 +46,7 @@ public class GetStatusControllerTest {
 		profilelst.add(profile);
 		Mockito.when(profileMappingService.getMyInterestProfiles(1)).thenReturn(profilelst);
 		HttpStatus statuscode = profileMappingController.getMyInterestProfiles(2).getStatusCode();
-		assertEquals(HttpStatus.NOT_FOUND, statuscode);
+		assertEquals(HttpStatus.OK, statuscode);
 	}
 
 	@Test
@@ -64,6 +64,6 @@ public class GetStatusControllerTest {
 		profilelst.add(profile);
 		Mockito.when(profileMappingService.getAcceptedProfiles(1)).thenReturn(profilelst);
 		HttpStatus statuscode = profileMappingController.getAcceptedProfiles(2).getStatusCode();
-		assertEquals(HttpStatus.NOT_FOUND, statuscode);
+		assertEquals(HttpStatus.OK, statuscode);
 	}
 }

@@ -1,4 +1,4 @@
-package com.strikers.elitematrimony.utils.Impl;
+package com.strikers.elitematrimony.utils.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
