@@ -85,5 +85,6 @@ public class ProfileServiceImplTest {
 		profile.setAge(Utils.calculateAge(profileRequestDto.getDob()));
 		when(cityRepository.findById(1)).thenReturn(Optional.of(city));
 		profile.setCity(Optional.of(city).get().getCityName());
+		assertNotNull(profile);
 	}
 }
