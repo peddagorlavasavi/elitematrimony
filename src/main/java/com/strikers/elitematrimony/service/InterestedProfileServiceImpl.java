@@ -1,5 +1,7 @@
 package com.strikers.elitematrimony.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,7 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 
 						profileMapping.setAcceptedStatus(StringConstant.ACCEPTED_STATUS);
 						profileMapping.setAcceptedDate(Utils.getCurrentDate());
+						
 						profileMappingRepository.save(profileMapping);
 
 						interestedProfileResponseDto.setMessage(StringConstant.MESSAGE_SUCCESS);
@@ -100,15 +103,19 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 					}
 
 				} else {
-					ProfileMapping profileMapping = profileMappingRepository.getByProfileIdAndAcceptedStatus(
-							interestedProfileDto.getProfileId(), interestedProfileDto.getInterestedProfileId(),
+
+					List<ProfileMapping> profileMappings = profileMappingRepository.getByProfileIdAndAcceptedStatus(
+							 interestedProfileDto.getInterestedProfileId(),interestedProfileDto.getProfileId(),
 							StringConstant.INTERESTED_STATUS);
 					interestedProfileResponseDto = new InterestedProfileResponseDto();
-					profileMapping.setAcceptedStatus(StringConstant.NOT_INTERESTED_STATUS);
-					profileMapping.setAcceptedDate(Utils.getCurrentDate());
-					profileMappingRepository.save(profileMapping);
-
-					interestedProfileResponseDto.setMessage(StringConstant.FAILED);
+					
+					profileMappings.forEach(profileMapping -> {
+						profileMapping.setAcceptedStatus(StringConstant.NOT_INTERESTED_STATUS);
+						profileMapping.setAcceptedDate(Utils.getCurrentDate());
+						profileMappingRepository.save(profileMapping);
+					});
+					
+					interestedProfileResponseDto.setMessage(StringConstant.SUCCESS_STATUS);
 					interestedProfileResponseDto.setStatusCode(401);
 				}
 			} else {

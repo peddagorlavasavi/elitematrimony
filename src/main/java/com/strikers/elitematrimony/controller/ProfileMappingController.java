@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.strikers.elitematrimony.dto.GetStatusResponseDto;
 import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.service.ProfileMappingService;
+import com.strikers.elitematrimony.utils.StringConstant;
 
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
@@ -37,12 +38,12 @@ public class ProfileMappingController {
 	public ResponseEntity<GetStatusResponseDto> getMyInterestProfiles(@PathVariable("profileId") Integer profileId) {
 		GetStatusResponseDto getStatusResponseDto=new GetStatusResponseDto();
 		List<Profile> interestedList = profileMappingService.getMyInterestProfiles(profileId);
-		if(interestedList.isEmpty()) {
+		if(interestedList!=null && !interestedList.isEmpty()) {
 			getStatusResponseDto.setProfileMapping(interestedList);
-			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
 		}else {
-			logger.info("Got the interested list");
-			getStatusResponseDto.setProfileMapping(interestedList);
+			logger.info("interested list is null or empty");
+			getStatusResponseDto.setMessage(StringConstant.FAILED);
 		return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
 		}
 	}
@@ -57,12 +58,12 @@ public class ProfileMappingController {
 	public ResponseEntity<GetStatusResponseDto> getAcceptedProfiles(@PathVariable("profileId") Integer profileId) {
 		List<Profile> acceptedList = profileMappingService.getAcceptedProfiles(profileId);
 		GetStatusResponseDto getStatusResponseDto=new GetStatusResponseDto();
-		if(acceptedList.isEmpty()) {
+		if(!acceptedList.isEmpty()) {
 			getStatusResponseDto.setProfileMapping(acceptedList);
-			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
 		}else {
-			logger.info("Got the accepted list");
-			getStatusResponseDto.setProfileMapping(acceptedList);
+			logger.info("interested list is null or empty");
+			getStatusResponseDto.setMessage(StringConstant.FAILED);
 		return new ResponseEntity<>(getStatusResponseDto, HttpStatus.OK);
 		}
 	}
@@ -80,7 +81,7 @@ public class ProfileMappingController {
 			logger.info("Got the interested list");
 			return new ResponseEntity<>(acceptedList, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(acceptedList, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 	}
 }

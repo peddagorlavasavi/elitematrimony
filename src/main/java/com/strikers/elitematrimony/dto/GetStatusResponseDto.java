@@ -12,4 +12,5 @@ import lombok.Setter;
 public class GetStatusResponseDto {
 
 	List<Profile> profileMapping;
+	String message;
 }
