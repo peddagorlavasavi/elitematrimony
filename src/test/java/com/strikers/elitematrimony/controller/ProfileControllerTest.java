@@ -56,32 +56,9 @@ public class ProfileControllerTest {
 	static LoginRequestDto loginRequestDto = new LoginRequestDto();
 	static List<Profile> profiles = new ArrayList<>();
 	static SuggestedListRequestDto suggestedListRequestDto = new SuggestedListRequestDto();
+	static SuggestedListResponseDto suggestedListResponseDto = new SuggestedListResponseDto();
 	static List<SuggestedListResponseDto> suggestedListResponseDtos = new ArrayList<>();
 
-	@Before
-	public void setUp() {
-		loginRequestDto.setMobileNumber("9894803625");
-		loginRequestDto.setPassword("12");
-		loginResponseDto.setFirstName("hema");
-		loginResponseDto.setGender("Female");
-		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
-		loginResponseDto.setProfileId(1);
-		profile.setProfileId(1);
-		profile.setMobileNumber("9894803625");
-		profile.setPassword("12");
-		profiles.add(profile);
-		loginRequestDto.setMobileNumber("9894803625");
-		loginRequestDto.setPassword("12");
-		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
-		loginResponseDto.setFirstName("hema");
-		loginResponseDto.setGender("Female");
-		loginResponseDto.setProfileId(1);
-		suggestedListRequestDto.setProfileId(1);
-		suggestedListRequestDto.setGender("Female");
-		BeanUtils.copyProperties(profiles, suggestedListResponseDtos);
-	}
-
-	
 	Profile profile = new Profile();
 	ProfileRequestDto profileRequestDto = new ProfileRequestDto();
 	ProfileResponseDto profileResponseDto = new ProfileResponseDto();
@@ -111,22 +88,19 @@ public class ProfileControllerTest {
 		profileResponseDto.setMessage("profile created successfully");
 		profileResponseDto.setProfileId(1);
 		profileResponseDto.setStatusCode(200);
-		loginRequestDto.setMobileNumber("9894803625");
-		loginRequestDto.setPassword("12");
-		loginResponseDto.setFirstName("hema");
-		loginResponseDto.setGender("Female");
-		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
-		loginResponseDto.setProfileId(1);
+
 		profile.setProfileId(1);
 		profile.setMobileNumber("9894803625");
 		profile.setPassword("12");
 		profiles.add(profile);
 		loginRequestDto.setMobileNumber("9894803625");
 		loginRequestDto.setPassword("12");
+
 		loginResponseDto.setMessage(StringConstant.LOGIN_SUCCESS);
 		loginResponseDto.setFirstName("hema");
 		loginResponseDto.setGender("Female");
 		loginResponseDto.setProfileId(1);
+
 		suggestedListRequestDto.setProfileId(1);
 		suggestedListRequestDto.setGender("Female");
 		BeanUtils.copyProperties(profiles, suggestedListResponseDtos);
@@ -150,18 +124,37 @@ public class ProfileControllerTest {
 	}
 
 	@Test
-	public void testSearchProfile() {
-		List<Profile> profileList = new ArrayList<>();
-		when(profileService.searchProfile("mca","male")).thenReturn(profileList);
-		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca","male");
-		assertThat(result.getBody()).hasSize(0);
+	public void testUserLoginNegative() throws ProfileNotFoundException {
+		LoginResponseDto loginResponseDto1 = null;
+		Mockito.when(profileService.userLogin(loginRequestDto)).thenReturn(loginResponseDto1);
+		Integer result = profileController.userLogin(loginRequestDto).getStatusCodeValue();
+		assertEquals(204, result);
 	}
 
 	@Test
-	public void testSearchProfileNegative() {
+	public void testListProfilePositive() {
+		suggestedListResponseDto.setProfileId(2);
+		suggestedListResponseDto.setGender("male");
+		suggestedListResponseDtos.add(suggestedListResponseDto);
+		Mockito.when(profileService.suggestedList(suggestedListRequestDto)).thenReturn(suggestedListResponseDtos);
+		Integer result = profileController.listProfile(suggestedListRequestDto).getStatusCodeValue();
+		assertEquals(200, result);
+	}
+
+	@Test
+	public void testListProfileNegative() {
+		List<SuggestedListResponseDto> suggestedListResponseDtoList = new ArrayList<>();
+		Mockito.when(profileService.suggestedList(suggestedListRequestDto)).thenReturn(suggestedListResponseDtoList);
+		Integer result = profileController.listProfile(suggestedListRequestDto).getStatusCodeValue();
+		assertEquals(204, result);
+	}
+
+	@Test
+	public void testSearchProfile() {
 		List<Profile> profileList = new ArrayList<>();
-		when(profileService.searchProfile("","")).thenReturn(profileList);
-		ResponseEntity<List<Profile>> result = profileController.searchProfile("","");
+		when(profileService.searchProfile("mca", "male")).thenReturn(profileList);
+		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca", "male");
 		assertThat(result.getBody()).hasSize(0);
 	}
+
 }
