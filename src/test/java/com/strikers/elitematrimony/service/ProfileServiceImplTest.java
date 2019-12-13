@@ -36,8 +36,8 @@ public class ProfileServiceImplTest {
 	@Test
 	public void testSearchProfile() {
 		List<Profile> profileList = new ArrayList<>();
-		when(profileRepository.searchProfile("mca")).thenReturn(profileList);
-		List<Profile> profile = profileService.searchProfile("mca");
+		when(profileRepository.searchProfile("mca","")).thenReturn(profileList);
+		List<Profile> profile = profileService.searchProfile("mca","");
 		assertNotNull(profile);
 
 	}

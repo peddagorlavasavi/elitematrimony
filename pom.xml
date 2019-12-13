@@ -18,7 +18,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<sonar.coverage.exclusions>**elitematrimony/*,**/config/*,**/entity/*,**/dto/*,**/repository/*,**/utils/*,**/exception/*</sonar.coverage.exclusions>
-
 	</properties>
 
 	<dependencies>

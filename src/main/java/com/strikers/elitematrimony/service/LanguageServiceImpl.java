@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.strikers.elitematrimony.entity.Language;
 import com.strikers.elitematrimony.exception.LanguageNotFoundException;
 import com.strikers.elitematrimony.repository.LanguageRepository;
-import com.strikers.elitematrimony.util.StringConstant;
+import com.strikers.elitematrimony.utils.StringConstant;
 
 @Service
 public class LanguageServiceImpl implements LanguageService {

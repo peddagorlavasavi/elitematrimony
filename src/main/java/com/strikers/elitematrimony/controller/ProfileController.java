@@ -42,9 +42,9 @@ public class ProfileController {
 	 * @param searchKey is used to search the above mentioned field of profile
 	 * @return List<Profile> is the list of profile
 	 */
-	@GetMapping()
-	public ResponseEntity<List<Profile>> searchProfile(@RequestParam("searchKey") String searchKey) {
-		List<Profile> profiles = profileService.searchProfile(searchKey);
+	@GetMapping("")
+	public ResponseEntity<List<Profile>> searchProfile(@RequestParam("searchKey") String searchKey, @RequestParam("gender") String gender) {
+		List<Profile> profiles = profileService.searchProfile(searchKey, gender);
 		if (profiles != null) {
 			logger.info("search result found");
 			return new ResponseEntity<>(profiles, HttpStatus.OK);

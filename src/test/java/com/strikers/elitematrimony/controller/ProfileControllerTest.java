@@ -31,7 +31,7 @@ import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.exception.AgeNotMatchedException;
 import com.strikers.elitematrimony.exception.ProfileNotFoundException;
 import com.strikers.elitematrimony.service.ProfileService;
-import com.strikers.elitematrimony.util.StringConstant;
+import com.strikers.elitematrimony.utils.StringConstant;
 
 /**
  * @author vasavi
@@ -152,16 +152,16 @@ public class ProfileControllerTest {
 	@Test
 	public void testSearchProfile() {
 		List<Profile> profileList = new ArrayList<>();
-		when(profileService.searchProfile("mca")).thenReturn(profileList);
-		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca");
+		when(profileService.searchProfile("mca","male")).thenReturn(profileList);
+		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca","male");
 		assertThat(result.getBody()).hasSize(0);
 	}
 
 	@Test
 	public void testSearchProfileNegative() {
 		List<Profile> profileList = new ArrayList<>();
-		when(profileService.searchProfile("")).thenReturn(profileList);
-		ResponseEntity<List<Profile>> result = profileController.searchProfile("");
+		when(profileService.searchProfile("","")).thenReturn(profileList);
+		ResponseEntity<List<Profile>> result = profileController.searchProfile("","");
 		assertThat(result.getBody()).hasSize(0);
 	}
 }
