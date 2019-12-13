@@ -55,11 +55,11 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 			List<Profile> profiles = profileMappingRepository.getMyInterestProfiles(profileId, StringConstant.INTERESTED_STATUS);
 			if(profiles!=null && !profiles.isEmpty())
 				return profiles;
-			return emptyList;
 
 		} else {
 			return emptyList;
 		}
+		return emptyList;
 
 	}
 

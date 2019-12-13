@@ -119,8 +119,8 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	/**
-	 * @author Hema listProfile is used to list the profiles based on profileId and
-	 *         gender
+	 * @author Hema 
+	 * listProfile is used to list the profiles based on profileId and gender
 	 * @param suggestedListRequestDto
 	 * @return
 	 */
