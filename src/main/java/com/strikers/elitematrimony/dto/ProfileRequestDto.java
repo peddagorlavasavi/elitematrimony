@@ -1,13 +1,6 @@
 package com.strikers.elitematrimony.dto;
 
-
 import java.time.LocalDate;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import com.strikers.elitematrimony.entity.Profile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +24,6 @@ public class ProfileRequestDto {
 	private String maritalStatus;
 	private String userName;
 	private String password;
-	private LocalDate createdDate;
-	private String status;
 	private String description;
 	private String profession;
 	private String email;

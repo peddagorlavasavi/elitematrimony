@@ -48,11 +48,11 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 	@Override
 	public InterestedProfileResponseDto showInterest(InterestedProfileDto interestedProfileDto)
 			throws MatrimonyServiceException {
-		logger.info("Inside InterestedProfileServiceImpl :showInterest" + interestedProfileDto.getProfileId());
+		logger.info("Entered into show interest service method");
 		InterestedProfileResponseDto interestedProfileResponseDto = null;
 
 		if (interestedProfileDto != null) {
-			logger.info("Inside InterestedProfileServiceImpl :showInterest :: " + interestedProfileDto.getProfileId());
+			logger.info("Got the value through InterestedProfileDto" );
 
 			Profile profile = profileRepository.findByProfileId(interestedProfileDto.getProfileId(),
 					StringConstant.ACTIVE_STATUS);
@@ -81,15 +81,14 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 						interestedProfileResponseDto.setStatusCode(401);
 					}
 				} else if (interestedProfileDto.getStatus().equalsIgnoreCase(StringConstant.ACCEPTED_STATUS)) {
-					logger.info("Inside InterestedProfileServiceImpl :showInteres accepted "
-							+ interestedProfileDto.getProfileId());
+					logger.info("Got the accepted status");
 
 					interestedProfileResponseDto = new InterestedProfileResponseDto();
 					ProfileMapping profileMapping = profileMappingRepository.getByProfileIdAndAcceptedStatusToAccept(
 							interestedProfileDto.getProfileId(), interestedProfileDto.getInterestedProfileId(),
 							StringConstant.INTERESTED_STATUS);
 					if (profileMapping != null) {
-						logger.info("Inside accepted not null " + profileMapping.getProfileMappingId());
+						logger.info("Inside accepted values are not null ");
 
 						profileMapping.setAcceptedStatus(StringConstant.ACCEPTED_STATUS);
 						profileMapping.setAcceptedDate(Utils.getCurrentDate());

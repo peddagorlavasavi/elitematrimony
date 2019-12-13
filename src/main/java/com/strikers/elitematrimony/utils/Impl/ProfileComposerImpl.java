@@ -21,10 +21,9 @@ public class ProfileComposerImpl implements ProfileComposer<List<Object[]>, List
 		List<Profile> profiles = new ArrayList<Profile>();
 
 		objectList.forEach(object -> {
-			logger.info("AT COMPOSER:  " + objectList.size());
 
 			if (object != null && object.length != 0) {
-				logger.info("AT COMPOSER PROFILE ID:  " + object[0].toString());
+				logger.info("At composer profile id");
 				Profile profile = new Profile();
 
 				profile.setProfileId(Integer.parseInt(object[0].toString()));

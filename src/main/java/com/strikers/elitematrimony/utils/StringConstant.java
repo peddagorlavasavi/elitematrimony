@@ -19,7 +19,7 @@ public class StringConstant {
 	public static final String FAILED = "Sorry ! unable to process at this time. Please try again.";
 	public static final String ALREADY_REQUESTED = "You have already sent an request.";
 	
-	public static final Integer MIN_AGE = 18;
+	public static final Integer MIN__AGE = 18;
 	public static final String AGE_VALIDATION_FAILED = "Age should be greater than 18";
 	public static final String MOBILE_VALIDATION_FAILED = "Mobile Number already exists.Require new mobile number for registration.";
 	public static final String MESSAGE_SUCCESS = " Your request has been submitted successfully";

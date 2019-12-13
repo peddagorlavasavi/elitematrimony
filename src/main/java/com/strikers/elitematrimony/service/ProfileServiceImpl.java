@@ -66,7 +66,7 @@ public class ProfileServiceImpl implements ProfileService {
 		logger.info("In registerProfile() method");
 		ProfileResponseDto profileResponseDto = new ProfileResponseDto();
 		if (profileRequestDto != null) {
-			if (Utils.calculateAge(profileRequestDto.getDob()) >= StringConstant.MIN_AGE) {
+			if (Utils.calculateAge(profileRequestDto.getDob()) >= StringConstant.MIN__AGE) {
 				Profile profile = new Profile();
 				BeanUtils.copyProperties(profileRequestDto, profile);
 				profile.setCreatedDate(Utils.getCurrentDate());
@@ -133,9 +133,11 @@ public class ProfileServiceImpl implements ProfileService {
 	 */
 	@Override
 	public List<SuggestedListResponseDto> suggestedList(SuggestedListRequestDto suggestedListRequestDto) {
+
 		logger.info("Showing profiles based on gender " + suggestedListRequestDto.getGender());
 		List<Profile> profileList = profileRepository.getSuggestedProfileList(suggestedListRequestDto.getProfileId(),
 				suggestedListRequestDto.getGender(), StringConstant.NOT_INTERESTED_STATUS);
+
 		List<SuggestedListResponseDto> suggestedListResponseDtos = new ArrayList<>();
 		profileList.forEach(profile -> {
 			SuggestedListResponseDto suggestedListResponseDto = new SuggestedListResponseDto();

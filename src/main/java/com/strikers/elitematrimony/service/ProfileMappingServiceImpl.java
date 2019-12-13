@@ -46,7 +46,7 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 					StringConstant.INTERESTED_STATUS);
 
 			List<Profile> profiles = profileComposer.compose(objects);
-			logger.info("getMyInterestProfiles :: " + profiles.size());
+			logger.info("Got all the interested profiles");
 
 			return profiles;
 		} else {
@@ -71,7 +71,7 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 					StringConstant.INTERESTED_STATUS);
 
 			List<Profile> profiles = profileComposer.compose(objects);
-			logger.info("getMyInterestProfiles :: " + profiles.size());
+			logger.info("Got my interested profiles");
 			return profiles;
 
 		} else {

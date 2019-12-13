@@ -13,7 +13,6 @@ public class ProfileValidatorImpl implements ProfileValidator<Object> {
 
 	@Override
 	public Boolean validate(Object t) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
