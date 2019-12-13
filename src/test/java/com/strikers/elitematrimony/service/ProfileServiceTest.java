@@ -67,23 +67,9 @@ public class ProfileServiceTest {
 	@Test(expected = ProfileNotFoundException.class)
 	public void testUserLoginNegative() throws ProfileNotFoundException {
 		Mockito.when(profileRepository.findByMobileNumberAndPassword("9894803625", "1")).thenReturn(profile);
-		profileServiceImpl.userLogin(loginRequestDto);
+		LoginResponseDto loginResponseDtos=profileServiceImpl.userLogin(loginRequestDto);
+		assertEquals(null, loginResponseDtos);
 	}
 
-	@Test
-	public void testSuggestedListPositive() {
-		Mockito.when(profileRepository.findByProfileIdNotAndGenderNotContains(1, "Female")).thenReturn(profiles);
-		List<SuggestedListResponseDto> suggestedListResponseDtos = profileServiceImpl
-				.suggestedList(suggestedListRequestDto);
-		assertEquals(suggestedListResponseDtos.size(), suggestedListResponseDtos.size());
-	}
-
-	@Test
-	public void testSuggestedListNegative() {
-		Mockito.when(profileRepository.findByProfileIdNotAndGenderNotContains(2, "Female")).thenReturn(profiles);
-		List<SuggestedListResponseDto> suggestedListResponseDtos = profileServiceImpl
-				.suggestedList(suggestedListRequestDto);
-		assertEquals(0, suggestedListResponseDtos.size());
-	}
 
 }

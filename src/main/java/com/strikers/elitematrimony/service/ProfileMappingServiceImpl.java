@@ -20,11 +20,11 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 
 	@Autowired
 	ProfileRepository profileRepository;
-	
-	
+
 	/**
-	 * @description @author Sujal @since2019-12-12 This method take profileId as input and
-	 *         if this profile is shown in interested by other profile.
+	 * @description @author Sujal @since2019-12-12 This method take profileId as
+	 *              input and if this profile is shown in interested by other
+	 *              profile.
 	 * @param profileId
 	 * @return get a list of persons who are interested on the given profile.
 	 */
@@ -33,12 +33,12 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 		List<Profile> profiles = new ArrayList<>();
 		Profile profile = profileRepository.findByProfileId(profileId);
 		if (profile != null) {
-			List<ProfileMapping> profileMappings= profile.getInterestedProfiles();
-			
+			List<ProfileMapping> profileMappings = profile.getInterestedProfiles();
+
 			profileMappings.forEach(profileMapping -> {
 				profiles.add(profileRepository.findByProfileId(profileMapping.getRequestedProfile().getProfileId()));
 			});
-			
+
 			// profiles = profileMappingRepository.getInterestedProfiles();
 			return profiles;
 		} else {
@@ -58,14 +58,18 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 		List<Profile> emptyList = new ArrayList<>();
 		Profile profile = profileRepository.findByProfileId(profileId);
 		if (profile != null) {
-			List<ProfileMapping> profileMappings= profile.getRequestedProfile();
-		
+			List<Profile> profiles = profileMappingRepository.getMyInterestProfiles(profileId,
+					StringConstant.INTERESTED_STATUS);
+			if (profiles != null && !profiles.isEmpty())
+				return profiles;
+			List<ProfileMapping> profileMappings = profile.getRequestedProfile();
+
 			profileMappings.forEach(profileMapping -> {
 				emptyList.add(profileRepository.findByProfileId(profileMapping.getRequestedProfile().getProfileId()));
 			});
-			
-			//List<Profile> profiles = profileMappingRepository.getInterestedProfiles();
-		
+
+			// List<Profile> profiles = profileMappingRepository.getInterestedProfiles();
+
 			return emptyList;
 
 		} else {
@@ -86,8 +90,9 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 		List<Profile> emptyList = new ArrayList<>();
 		Profile profile = profileRepository.findByProfileId(profileId);
 		if (profile != null) {
-			List<Profile> profileMappings = profileMappingRepository.getAcceptedProfiles(profileId, StringConstant.ACCEPTED_STATUS);
-		
+			List<Profile> profileMappings = profileMappingRepository.getAcceptedProfiles(profileId,
+					StringConstant.ACCEPTED_STATUS);
+
 			return profileMappings;
 		} else {
 			return emptyList;

@@ -2,6 +2,8 @@ package com.strikers.elitematrimony.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,29 +16,28 @@ import com.strikers.elitematrimony.entity.City;
 import com.strikers.elitematrimony.exception.CityNotFoundException;
 import com.strikers.elitematrimony.service.CityService;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * CityController is the controller used to show the list of cities
  */
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/cities")
-@Slf4j
 public class CityController {
 
 	@Autowired
 	CityService cityService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
 	/**
 	 * @author Hema
-	 * listCity is used to list cities
-	 * @return
+	 * @description -> this method is used to list cities
+	 * @return <List<City>>
 	 * @throws CityNotFoundException
 	 */
 	@GetMapping()
 	public ResponseEntity<List<City>> listCity() throws CityNotFoundException {
-		log.info("Listing all the Cities");
+		logger.info("Listing all the Cities");
 		List<City> cityList = cityService.listCity();
 		if (cityList.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
