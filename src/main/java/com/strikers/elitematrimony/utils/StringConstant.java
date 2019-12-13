@@ -13,7 +13,7 @@ public class StringConstant {
 	public static final String ACCEPTED_STATUS = "ACCEPTED";
 
 	public static final String SUCCESS = "Profile registered successfully";
-	public static final String FAILED = "FAILED";
+	public static final String FAILED = "Sorry ! unable to process at this time. Please try again.";
 	public static final String ALREADY_REQUESTED = "You have already sent an request.";
 	
 	public static final Integer MIN_AGE = 18;

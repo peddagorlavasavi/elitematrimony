@@ -20,7 +20,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 	 * @param gender 
 	 * @return List<Profile>
 	 */
-	@Query("select p from Profile p where (p.language like %:searchKey% or p.qualification like %:searchKey% or p.maritalStatus like %:searchKey% or p.qualification like %:searchKey% or p.hobby like %:searchKey% or p.city like %:searchKey%) and (p.gender !=:gender)")
+	@Query("select p from Profile p where (p.firstName like %:searchKey% or p.lastName like %:searchKey% or p.language like %:searchKey% or p.qualification like %:searchKey% or p.maritalStatus like %:searchKey% or p.qualification like %:searchKey% or p.hobby like %:searchKey% or p.city like %:searchKey%) and (p.gender !=:gender)")
 	List<Profile> searchProfile(@Param("searchKey") String searchKey, @Param("gender")  String gender);
 	
 	/**

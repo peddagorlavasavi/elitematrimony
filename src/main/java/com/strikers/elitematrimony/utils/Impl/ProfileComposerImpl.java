@@ -19,9 +19,9 @@ public class ProfileComposerImpl implements ProfileComposer<List<Object[]>, List
 	@Override
 	public List<Profile> compose(List<Object[]> objectList) {
 		List<Profile> profiles = new ArrayList<Profile>();
-		logger.info("AT COMPOSER:  " + objectList.size());
 
 		objectList.forEach(object -> {
+			logger.info("AT COMPOSER:  " + objectList.size());
 
 			if (object != null && object.length != 0) {
 				logger.info("AT COMPOSER PROFILE ID:  " + object[0].toString());
