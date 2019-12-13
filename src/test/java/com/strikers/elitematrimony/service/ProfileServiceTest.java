@@ -21,7 +21,7 @@ import com.strikers.elitematrimony.dto.SuggestedListResponseDto;
 import com.strikers.elitematrimony.entity.Profile;
 import com.strikers.elitematrimony.exception.ProfileNotFoundException;
 import com.strikers.elitematrimony.repository.ProfileRepository;
-import com.strikers.elitematrimony.util.StringConstant;
+import com.strikers.elitematrimony.utils.StringConstant;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class ProfileServiceTest {
@@ -67,7 +67,8 @@ public class ProfileServiceTest {
 	@Test(expected = ProfileNotFoundException.class)
 	public void testUserLoginNegative() throws ProfileNotFoundException {
 		Mockito.when(profileRepository.findByMobileNumberAndPassword("9894803625", "1")).thenReturn(profile);
-		profileServiceImpl.userLogin(loginRequestDto);
+		LoginResponseDto loginResponseDtos=profileServiceImpl.userLogin(loginRequestDto);
+		assertEquals(null, loginResponseDtos);
 	}
 
 	@Test

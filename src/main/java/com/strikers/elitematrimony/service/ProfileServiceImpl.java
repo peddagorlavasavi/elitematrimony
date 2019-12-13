@@ -25,7 +25,7 @@ import com.strikers.elitematrimony.exception.ProfileNotFoundException;
 import com.strikers.elitematrimony.repository.CityRepository;
 import com.strikers.elitematrimony.repository.LanguageRepository;
 import com.strikers.elitematrimony.repository.ProfileRepository;
-import com.strikers.elitematrimony.util.StringConstant;
+import com.strikers.elitematrimony.utils.StringConstant;
 import com.strikers.elitematrimony.utils.Utils;
 
 @Service
@@ -49,9 +49,9 @@ public class ProfileServiceImpl implements ProfileService {
 	 * @return List<Profile> is the list of profile
 	 */
 	@Override
-	public List<Profile> searchProfile(String searchKey) {
+	public List<Profile> searchProfile(String searchKey, String gender) {
 		logger.info("inside Profile Service");
-		return profileRepository.searchProfile(searchKey);
+		return profileRepository.searchProfile(searchKey, gender);
 	}
 
 	/**
@@ -68,6 +68,10 @@ public class ProfileServiceImpl implements ProfileService {
 			if (Utils.calculateAge(profileRequestDto.getDob()) >= StringConstant.MIN_AGE) {
 				Profile profile = new Profile();
 				BeanUtils.copyProperties(profileRequestDto, profile);
+				profile.setCreatedDate(Utils.getCurrentDate());
+				profile.setStatus(com.strikers.elitematrimony.utils.StringConstant.ACTIVE_STATUS);
+				profile.setUserName(profileRequestDto.getMobileNumber());
+				profile.setAge(Utils.calculateAge(profileRequestDto.getDob()));
 
 				Optional<City> optionalCity = cityRepository.findById(Integer.parseInt(profileRequestDto.getCity()));
 				if (optionalCity.isPresent()) {
@@ -126,11 +130,11 @@ public class ProfileServiceImpl implements ProfileService {
 	 */
 	@Override
 	public List<SuggestedListResponseDto> suggestedList(SuggestedListRequestDto suggestedListRequestDto) {
-		logger.info("Showing profiles based on gender");
-		List<Profile> profiles = profileRepository.findByProfileIdNotAndGenderNotContains(
+		logger.info("Showing profiles based on gender "+suggestedListRequestDto.getGender());
+		List<Profile> profileList = profileRepository.getSuggestedProfiles(
 				suggestedListRequestDto.getProfileId(), suggestedListRequestDto.getGender());
 		List<SuggestedListResponseDto> suggestedListResponseDtos = new ArrayList<>();
-		profiles.forEach(profile -> {
+		profileList.forEach(profile -> {
 			SuggestedListResponseDto suggestedListResponseDto = new SuggestedListResponseDto();
 			BeanUtils.copyProperties(profile, suggestedListResponseDto);
 			suggestedListResponseDtos.add(suggestedListResponseDto);

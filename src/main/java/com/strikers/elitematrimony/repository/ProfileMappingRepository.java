@@ -44,6 +44,6 @@ public interface ProfileMappingRepository extends JpaRepository<ProfileMapping, 
 	List<Profile> getAcceptedProfiles(@Param("profileId") Integer profileId,  @Param("status") String status);
 
 	@Query("select p from ProfileMapping p where p.requestedProfile.profileId =:profileId and p.interestedProfile.profileId =:interestedProfileId and p.acceptedStatus =:status")
-	ProfileMapping getByProfileIdAndAcceptedStatus(Integer profileId, Integer interestedProfileId, String status);
+	ProfileMapping getByProfileIdAndAcceptedStatus(@Param("profileId") Integer profileId, @Param("interestedProfileId") Integer interestedProfileId,  @Param("status") String status);
 
 }

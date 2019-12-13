@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.strikers.elitematrimony.utils.StringConstant;
 import com.strikers.elitematrimony.entity.Profile;
+import com.strikers.elitematrimony.entity.ProfileMapping;
 import com.strikers.elitematrimony.repository.ProfileMappingRepository;
 import com.strikers.elitematrimony.repository.ProfileRepository;
 
@@ -19,11 +20,11 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 
 	@Autowired
 	ProfileRepository profileRepository;
-	
-	
+
 	/**
-	 * @description @author Sujal @since2019-12-12 This method take profileId as input and
-	 *         if this profile is shown in interested by other profile.
+	 * @description @author Sujal @since2019-12-12 This method take profileId as
+	 *              input and if this profile is shown in interested by other
+	 *              profile.
 	 * @param profileId
 	 * @return get a list of persons who are interested on the given profile.
 	 */
@@ -32,8 +33,13 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 		List<Profile> profiles = new ArrayList<>();
 		Profile profile = profileRepository.findByProfileId(profileId);
 		if (profile != null) {
-			 profiles = profileMappingRepository.getInterestedProfiles(profileId,
-					StringConstant.INTERESTED_STATUS);
+			List<ProfileMapping> profileMappings = profile.getInterestedProfiles();
+
+			profileMappings.forEach(profileMapping -> {
+				profiles.add(profileRepository.findByProfileId(profileMapping.getRequestedProfile().getProfileId()));
+			});
+
+			// profiles = profileMappingRepository.getInterestedProfiles();
 			return profiles;
 		} else {
 			return profiles;
@@ -52,14 +58,23 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 		List<Profile> emptyList = new ArrayList<>();
 		Profile profile = profileRepository.findByProfileId(profileId);
 		if (profile != null) {
-			List<Profile> profiles = profileMappingRepository.getMyInterestProfiles(profileId, StringConstant.INTERESTED_STATUS);
-			if(profiles!=null && !profiles.isEmpty())
+			List<Profile> profiles = profileMappingRepository.getMyInterestProfiles(profileId,
+					StringConstant.INTERESTED_STATUS);
+			if (profiles != null && !profiles.isEmpty())
 				return profiles;
+			List<ProfileMapping> profileMappings = profile.getRequestedProfile();
+
+			profileMappings.forEach(profileMapping -> {
+				emptyList.add(profileRepository.findByProfileId(profileMapping.getRequestedProfile().getProfileId()));
+			});
+
+			// List<Profile> profiles = profileMappingRepository.getInterestedProfiles();
+
+			return emptyList;
 
 		} else {
 			return emptyList;
 		}
-		return emptyList;
 
 	}
 
@@ -75,8 +90,9 @@ public class ProfileMappingServiceImpl implements ProfileMappingService {
 		List<Profile> emptyList = new ArrayList<>();
 		Profile profile = profileRepository.findByProfileId(profileId);
 		if (profile != null) {
-			List<Profile> profileMappings = profileMappingRepository.getAcceptedProfiles(profileId, StringConstant.ACCEPTED_STATUS);
-		
+			List<Profile> profileMappings = profileMappingRepository.getAcceptedProfiles(profileId,
+					StringConstant.ACCEPTED_STATUS);
+
 			return profileMappings;
 		} else {
 			return emptyList;

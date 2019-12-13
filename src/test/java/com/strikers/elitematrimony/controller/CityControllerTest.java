@@ -45,7 +45,7 @@ public class CityControllerTest {
 	}
 	
 	@Test
-	public void testListHospitalNegative() throws CityNotFoundException {
+	public void testListCityNegative() throws CityNotFoundException {
 		List<City> cityLists = new ArrayList<>();
 		Mockito.when(cityService.listCity()).thenReturn(cityLists);
 		Integer result = cityController.listCity().getStatusCodeValue();
