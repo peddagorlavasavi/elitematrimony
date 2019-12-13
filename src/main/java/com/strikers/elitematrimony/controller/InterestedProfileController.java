@@ -43,7 +43,7 @@ public class InterestedProfileController {
 	 */
 	@PostMapping()
 	public ResponseEntity<InterestedProfileResponseDto> showInterest(@RequestBody InterestedProfileDto interestedProfileDto) throws MatrimonyServiceException {
-		logger.info("Inside InterestedProfileController:shoeInterest");
+		logger.info("Inside InterestedProfileController:showInterest");
 		InterestedProfileResponseDto interestedProfileResponseDto = interestedProfileService
 				.showInterest(interestedProfileDto);
 		if(interestedProfileResponseDto!=null)

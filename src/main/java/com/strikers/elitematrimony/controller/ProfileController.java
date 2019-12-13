@@ -73,7 +73,7 @@ public class ProfileController {
 	 * @author Hema userLogin is used to verify the user by getting the mobileNumber
 	 *         and password
 	 * @param loginRequestDto
-	 * @return
+	 * @return LoginResponseDto
 	 * @throws ProfileNotFoundException
 	 */
 	@PostMapping("/login")
@@ -92,7 +92,7 @@ public class ProfileController {
 	 * @author Hema
 	 * listProfile is used to list the profiles based on profileId and gender
 	 * @param suggestedListRequestDto
-	 * @return
+	 * @return List<SuggestedListResponseDto>
 	 */
 	@GetMapping("/profileList")
 	public ResponseEntity<List<SuggestedListResponseDto>> listProfile(SuggestedListRequestDto suggestedListRequestDto){

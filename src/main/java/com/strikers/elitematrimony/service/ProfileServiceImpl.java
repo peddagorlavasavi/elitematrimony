@@ -130,13 +130,10 @@ public class ProfileServiceImpl implements ProfileService {
 	 */
 	@Override
 	public List<SuggestedListResponseDto> suggestedList(SuggestedListRequestDto suggestedListRequestDto) {
-		logger.info("Showing profiles based on gender "+suggestedListRequestDto.getGender());
-		List<Profile> profiles = profileRepository.findByProfileIdNotAndGenderNotContains(
-				suggestedListRequestDto.getProfileId(), suggestedListRequestDto.getGender());
-		
-		List<Profile> profileList = profileRepository.getSuggestedProfiles(
-				suggestedListRequestDto.getProfileId(), suggestedListRequestDto.getGender());
-		
+		logger.info("Showing profiles based on gender " + suggestedListRequestDto.getGender());
+		List<Profile> profileList = profileRepository.getSuggestedProfiles(suggestedListRequestDto.getProfileId(),
+				suggestedListRequestDto.getGender());
+
 		List<SuggestedListResponseDto> suggestedListResponseDtos = new ArrayList<>();
 		profileList.forEach(profile -> {
 			SuggestedListResponseDto suggestedListResponseDto = new SuggestedListResponseDto();

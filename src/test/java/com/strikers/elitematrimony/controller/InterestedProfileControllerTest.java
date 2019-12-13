@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.strikers.elitematrimony.dto.InterestedProfileDto;
@@ -51,5 +52,14 @@ public class InterestedProfileControllerTest{
 		when(interestedProfileService.showInterest(interestedProfileDto)).thenReturn(interestedProfileResponseDto);
 		ResponseEntity<InterestedProfileResponseDto> result = interestedprofileController.showInterest(interestedProfileDto);
 		assertEquals("your interested submitted successfully", result.getBody().getMessage());
+	}
+	
+	@Test
+	public void testShowInterestNegative() throws MatrimonyServiceException {
+		logger.info("Inside showInterestTest method ");
+		InterestedProfileResponseDto interestedProfileResponseDtos = null;
+		when(interestedProfileService.showInterest(interestedProfileDto)).thenReturn(interestedProfileResponseDtos);
+		HttpStatus result = interestedprofileController.showInterest(interestedProfileDto).getStatusCode();
+		assertEquals(HttpStatus.BAD_REQUEST, result);
 	}
 }

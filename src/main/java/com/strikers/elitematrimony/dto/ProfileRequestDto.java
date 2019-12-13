@@ -1,13 +1,6 @@
 package com.strikers.elitematrimony.dto;
 
-
 import java.time.LocalDate;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import com.strikers.elitematrimony.entity.Profile;
 
 import lombok.Getter;
 import lombok.Setter;

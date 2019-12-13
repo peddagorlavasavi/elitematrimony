@@ -35,7 +35,6 @@ public class ProfileMappingController {
 	 */
 	@GetMapping("{profileId}/myinterest")
 	public ResponseEntity<GetStatusResponseDto> getMyInterestProfiles(@PathVariable("profileId") Integer profileId) {
-		logger.info(profileId+"");
 		GetStatusResponseDto getStatusResponseDto=new GetStatusResponseDto();
 		List<Profile> interestedList = profileMappingService.getMyInterestProfiles(profileId);
 		if(interestedList.isEmpty()) {

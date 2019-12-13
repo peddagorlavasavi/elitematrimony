@@ -81,7 +81,6 @@ public class ProfileControllerTest {
 		BeanUtils.copyProperties(profiles, suggestedListResponseDtos);
 	}
 
-	
 	Profile profile = new Profile();
 	ProfileRequestDto profileRequestDto = new ProfileRequestDto();
 	ProfileResponseDto profileResponseDto = new ProfileResponseDto();
@@ -152,16 +151,16 @@ public class ProfileControllerTest {
 	@Test
 	public void testSearchProfile() {
 		List<Profile> profileList = new ArrayList<>();
-		when(profileService.searchProfile("mca","male")).thenReturn(profileList);
-		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca","male");
+		when(profileService.searchProfile("mca", "male")).thenReturn(profileList);
+		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca", "male");
 		assertThat(result.getBody()).hasSize(0);
 	}
 
 	@Test
 	public void testSearchProfileNegative() {
-		List<Profile> profileList = new ArrayList<>();
-		when(profileService.searchProfile("","")).thenReturn(profileList);
-		ResponseEntity<List<Profile>> result = profileController.searchProfile("","");
-		assertThat(result.getBody()).hasSize(0);
+		List<Profile> profileList = null;
+		Mockito.when(profileService.searchProfile("", "")).thenReturn(profileList);
+		int statuscode = profileController.searchProfile("", "").getStatusCodeValue();
+		assertEquals(204, statuscode);
 	}
 }
