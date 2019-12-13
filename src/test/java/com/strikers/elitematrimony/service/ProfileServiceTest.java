@@ -71,20 +71,5 @@ public class ProfileServiceTest {
 		assertEquals(null, loginResponseDtos);
 	}
 
-	@Test
-	public void testSuggestedListPositive() {
-		Mockito.when(profileRepository.findByProfileIdNotAndGenderNotContains(1, "Female")).thenReturn(profiles);
-		List<SuggestedListResponseDto> suggestedListResponseDtos = profileServiceImpl
-				.suggestedList(suggestedListRequestDto);
-		assertEquals(suggestedListResponseDtos.size(), suggestedListResponseDtos.size());
-	}
-
-	@Test
-	public void testSuggestedListNegative() {
-		Mockito.when(profileRepository.findByProfileIdNotAndGenderNotContains(2, "Female")).thenReturn(profiles);
-		List<SuggestedListResponseDto> suggestedListResponseDtos = profileServiceImpl
-				.suggestedList(suggestedListRequestDto);
-		assertEquals(0, suggestedListResponseDtos.size());
-	}
 
 }

@@ -101,10 +101,11 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	/**
-	 * @author Hema userLogin is used to verify the user by getting the mobileNumber
+	 * @author Hema 
+	 * @description -> this method is used to verify the user by getting the mobileNumber
 	 *         and password
 	 * @param loginRequestDto
-	 * @return
+	 * @return LoginResponseDto
 	 * @throws ProfileNotFoundException
 	 */
 	@Override
@@ -124,9 +125,9 @@ public class ProfileServiceImpl implements ProfileService {
 
 	/**
 	 * @author Hema 
-	 * listProfile is used to list the profiles based on profileId and gender
+	 * @description ->  This method is used to list the profiles based on profileId and gender
 	 * @param suggestedListRequestDto
-	 * @return
+	 * @return List<SuggestedListResponseDto>
 	 */
 	@Override
 	public List<SuggestedListResponseDto> suggestedList(SuggestedListRequestDto suggestedListRequestDto) {
