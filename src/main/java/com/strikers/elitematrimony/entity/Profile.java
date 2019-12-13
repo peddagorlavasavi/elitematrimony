@@ -50,7 +50,7 @@ public class Profile {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "requestedProfile")
-	private List<ProfileMapping> requestedProfile;
+	private List<ProfileMapping> requestedProfiles;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "interestedProfile")

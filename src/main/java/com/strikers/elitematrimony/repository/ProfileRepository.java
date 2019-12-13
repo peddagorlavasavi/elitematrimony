@@ -29,7 +29,8 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 	 * @param profileId 
 	 * @return Profile
 	 */
-	Profile findByProfileId(Integer profileId);
+	@Query("select p from Profile p where p.profileId=:profileId and p.status=:status")
+	Profile findByProfileId(@Param("profileId") Integer profileId, @Param("status") String status);
 	
 	Profile findByMobileNumberAndPassword(String mobileNumber, String password);
 

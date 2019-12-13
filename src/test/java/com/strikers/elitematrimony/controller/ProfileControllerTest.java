@@ -19,6 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.strikers.elitematrimony.dto.LoginRequestDto;
@@ -69,7 +70,6 @@ public class ProfileControllerTest {
 		profileRequestDto.setAddress("bangalore");
 		profileRequestDto.setAge(25);
 		profileRequestDto.setCity("bangalore");
-		profileRequestDto.setCreatedDate(LocalDate.of(2019, 12, 12));
 		profileRequestDto.setDescription("abc");
 		profileRequestDto.setDob(LocalDate.of(2000, 12, 12));
 		profileRequestDto.setEmail("vasavi@gmail.com");
@@ -83,7 +83,6 @@ public class ProfileControllerTest {
 		profileRequestDto.setPassword("vasavi@123");
 		profileRequestDto.setMonthlyIncome(10000.00);
 		profileRequestDto.setQualification("mca");
-		profileRequestDto.setStatus("active");
 		profileRequestDto.setUserName("vasavi");
 		profileResponseDto.setMessage("profile created successfully");
 		profileResponseDto.setProfileId(1);
@@ -150,19 +149,28 @@ public class ProfileControllerTest {
 	}
 
 	@Test
-	public void testListProfileNegative() {
-		List<SuggestedListResponseDto> suggestedListResponseDtoList = new ArrayList<>();
-		Mockito.when(profileService.suggestedList(suggestedListRequestDto)).thenReturn(suggestedListResponseDtoList);
-		Integer result = profileController.listProfile(suggestedListRequestDto).getStatusCodeValue();
-		assertEquals(204, result);
-	}
-
-	@Test
 	public void testSearchProfile() {
 		List<Profile> profileList = new ArrayList<>();
 		when(profileService.searchProfile("mca", "male")).thenReturn(profileList);
 		ResponseEntity<List<Profile>> result = profileController.searchProfile("mca", "male");
 		assertThat(result.getBody()).hasSize(0);
+	}
+	
+	@Test
+	public void testListProfile() {
+	when(profileService.suggestedList(suggestedListRequestDto)).thenReturn(suggestedListResponseDtos);
+	ResponseEntity<List<SuggestedListResponseDto>>  result = profileController.listProfile(suggestedListRequestDto);
+	assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
+	}
+	@Test
+	public void testListProfileNegative() {
+	suggestedListRequestDto.setGender("");
+	List<SuggestedListResponseDto> suggestedList = new ArrayList<>();
+	suggestedList.add(suggestedListResponseDto);
+	when(profileService.suggestedList(suggestedListRequestDto)).thenReturn(suggestedList);
+	ResponseEntity<List<SuggestedListResponseDto>>  result = profileController.listProfile(suggestedListRequestDto);
+	assertEquals(HttpStatus.OK, result.getStatusCode());
+
 	}
 
 }

@@ -47,7 +47,6 @@ public class ProfileServiceImplTest {
 		profileRequestDto.setAddress("abc");
 		profileRequestDto.setAge(28);
 		profileRequestDto.setCity("banglore");
-		profileRequestDto.setCreatedDate(LocalDate.of(2019, 10, 10));
 		profileRequestDto.setDescription("abc");
 		profileRequestDto.setDob(LocalDate.of(1992, 10, 10));
 		profileRequestDto.setEmail("abc@gmail.com");
@@ -62,7 +61,6 @@ public class ProfileServiceImplTest {
 		profileRequestDto.setPassword("abcdef");
 		profileRequestDto.setProfession("IT");
 		profileRequestDto.setQualification("BE");
-		profileRequestDto.setStatus("active");
 		profileRequestDto.setUserName("sri");
 		city.setCityId(1);
 		city.setCityName(profileRequestDto.getCity());
@@ -77,15 +75,15 @@ public class ProfileServiceImplTest {
 
 	}
 	
-//	@Test
-//	public void testCreateProfilePositive() {
-//		Profile profile = new Profile();
-//		BeanUtils.copyProperties(profileRequestDto, profile);
-//		profile.setCreatedDate(LocalDate.of(2019, 11, 12));
-//		profile.setStatus(com.strikers.elitematrimony.utils.StringConstant.ACTIVE_STATUS);
-//		profile.setUserName(profileRequestDto.getMobileNumber());
-//		profile.setAge(Utils.calculateAge(profileRequestDto.getDob()));
-//		when(cityRepository.findById(1)).thenReturn(Optional.of(city));
-//		profile.setCity(Optional.of(city).get().getCityName());
-//	}
+	@Test
+	public void testCreateProfilePositive() {
+		Profile profile = new Profile();
+		BeanUtils.copyProperties(profileRequestDto, profile);
+		profile.setCreatedDate(LocalDate.of(2019, 11, 12));
+		profile.setStatus(com.strikers.elitematrimony.utils.StringConstant.ACTIVE_STATUS);
+		profile.setUserName(profileRequestDto.getMobileNumber());
+		profile.setAge(Utils.calculateAge(profileRequestDto.getDob()));
+		when(cityRepository.findById(1)).thenReturn(Optional.of(city));
+		profile.setCity(Optional.of(city).get().getCityName());
+	}
 }

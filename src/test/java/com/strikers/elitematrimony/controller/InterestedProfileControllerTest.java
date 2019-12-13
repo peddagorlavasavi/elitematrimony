@@ -31,7 +31,7 @@ public class InterestedProfileControllerTest{
 	/**
 	 * The Constant log.
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(ProfileControllerTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(InterestedProfileControllerTest.class);
 	@InjectMocks
 	InterestedProfileController interestedprofileController;
 

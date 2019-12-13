@@ -24,8 +24,6 @@ public class ProfileRequestDto {
 	private String maritalStatus;
 	private String userName;
 	private String password;
-	private LocalDate createdDate;
-	private String status;
 	private String description;
 	private String profession;
 	private String email;
