@@ -14,12 +14,13 @@ import com.strikers.elitematrimony.exception.ProfileNotFoundException;
 
 public interface ProfileService {
 
-	List<Profile> searchProfile(String searchKey);
+	List<Profile> searchProfile(String searchKey, String gender);
 
 	public ProfileResponseDto createProfile(ProfileRequestDto profileRequestDto) throws AgeNotMatchedException;
 
 	public LoginResponseDto userLogin(LoginRequestDto loginRequestDto) throws ProfileNotFoundException;
 
 	List<SuggestedListResponseDto> suggestedList(SuggestedListRequestDto suggestedListRequestDto);
+
 
 }

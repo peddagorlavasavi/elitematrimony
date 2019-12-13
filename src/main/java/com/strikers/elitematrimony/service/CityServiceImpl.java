@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.strikers.elitematrimony.entity.City;
 import com.strikers.elitematrimony.exception.CityNotFoundException;
 import com.strikers.elitematrimony.repository.CityRepository;
-import com.strikers.elitematrimony.util.StringConstant;
+import com.strikers.elitematrimony.utils.StringConstant;
 
 @Service
 public class CityServiceImpl implements CityService{

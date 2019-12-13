@@ -58,7 +58,7 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 				if (interestedProfileDto.getStatus().equalsIgnoreCase(StringConstant.INTERESTED_STATUS)) {
 					interestedProfileResponseDto = new InterestedProfileResponseDto();
 					ProfileMapping profileMapping = new ProfileMapping();
-					profileMapping.setRequestedProfile(intrestedProfile);
+					profileMapping.setRequestedProfile(profile);
 					profileMapping.setRequestedDate(Utils.getCurrentDate());
 					profileMapping.setAcceptedStatus(StringConstant.INTERESTED_STATUS);
 					profileMapping.setInterestedProfile(intrestedProfile);
@@ -71,8 +71,7 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 
 					interestedProfileResponseDto = new InterestedProfileResponseDto();
 					ProfileMapping profileMapping = profileMappingRepository.getByProfileIdAndAcceptedStatus(
-							interestedProfileDto.getProfileId(), interestedProfileDto.getInterestedProfileId(),
-							StringConstant.INTERESTED_STATUS);
+							interestedProfileDto.getProfileId(), interestedProfileDto.getInterestedProfileId(), StringConstant.INTERESTED_STATUS);
 					profileMapping.setAcceptedStatus(StringConstant.ACCEPTED_STATUS);
 					profileMapping.setAcceptedDate(Utils.getCurrentDate());
 					profileMappingRepository.save(profileMapping);

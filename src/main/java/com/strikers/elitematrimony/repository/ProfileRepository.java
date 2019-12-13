@@ -17,10 +17,11 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 	 * @description searchProfile is used to fetch the list of profile
 	 * based on language, maritalStatus, qualification, profession, hobby or city
 	 * @param searchKey
+	 * @param gender 
 	 * @return List<Profile>
 	 */
-	@Query("select p from Profile p where p.language like %:searchKey% or p.qualification like %:searchKey% or p.maritalStatus like %:searchKey% or p.qualification like %:searchKey% or p.hobby like %:searchKey% or p.city like %:searchKey%")
-	List<Profile> searchProfile(@Param("searchKey") String searchKey);
+	@Query("select p from Profile p where (p.language like %:searchKey% or p.qualification like %:searchKey% or p.maritalStatus like %:searchKey% or p.qualification like %:searchKey% or p.hobby like %:searchKey% or p.city like %:searchKey%) and (p.gender !=:gender)")
+	List<Profile> searchProfile(@Param("searchKey") String searchKey, @Param("gender")  String gender);
 	
 	/**
 	 * @description searchProfile is used to fetch the list of profile
@@ -34,5 +35,8 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
 	List<Profile> findByProfileIdNotAndGenderNotContains(Integer profileId, String gender);
 
+	@Query("select p from Profile p where p.profileId !=:profileId and p.gender !=:gender ")
+	List<Profile> getSuggestedProfiles(@Param("profileId") Integer profileId, @Param("gender") String gender);
 
 }
+
