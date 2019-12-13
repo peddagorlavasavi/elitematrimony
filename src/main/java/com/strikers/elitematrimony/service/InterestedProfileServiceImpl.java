@@ -50,34 +50,55 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 		InterestedProfileResponseDto interestedProfileResponseDto = null;
 
 		if (interestedProfileDto != null) {
-			logger.info("Inside InterestedProfileServiceImpl :showInterest 99999999999 " + interestedProfileDto.getProfileId());
+			logger.info("Inside InterestedProfileServiceImpl :showInterest :: " + interestedProfileDto.getProfileId());
 
-			Profile profile = profileRepository.findByProfileId(interestedProfileDto.getProfileId());
-			Profile intrestedProfile = profileRepository.findByProfileId(interestedProfileDto.getInterestedProfileId());
+			Profile profile = profileRepository.findByProfileId(interestedProfileDto.getProfileId(),
+					StringConstant.ACTIVE_STATUS);
+			Profile intrestedProfile = profileRepository.findByProfileId(interestedProfileDto.getInterestedProfileId(),
+					StringConstant.ACTIVE_STATUS);
 			if (profile != null && intrestedProfile != null) {
+
 				if (interestedProfileDto.getStatus().equalsIgnoreCase(StringConstant.INTERESTED_STATUS)) {
+					ProfileMapping profileMapping = profileMappingRepository.getByProfileIdAndAcceptedStatusToInterest(
+							interestedProfileDto.getProfileId(), interestedProfileDto.getInterestedProfileId(),
+							StringConstant.INTERESTED_STATUS, StringConstant.ACCEPTED_STATUS);
 					interestedProfileResponseDto = new InterestedProfileResponseDto();
-					ProfileMapping profileMapping = new ProfileMapping();
-					profileMapping.setRequestedProfile(profile);
-					profileMapping.setRequestedDate(Utils.getCurrentDate());
-					profileMapping.setAcceptedStatus(StringConstant.INTERESTED_STATUS);
-					profileMapping.setInterestedProfile(intrestedProfile);
-					profileMappingRepository.save(profileMapping);
 
-					interestedProfileResponseDto.setMessage(StringConstant.MESSAGE_SUCCESS);
-					interestedProfileResponseDto.setStatusCode(200);
+					if (profileMapping == null) {
+						profileMapping = new ProfileMapping();
+						profileMapping.setRequestedProfile(profile);
+						profileMapping.setRequestedDate(Utils.getCurrentDate());
+						profileMapping.setAcceptedStatus(StringConstant.INTERESTED_STATUS);
+						profileMapping.setInterestedProfile(intrestedProfile);
+						profileMappingRepository.save(profileMapping);
+
+						interestedProfileResponseDto.setMessage(StringConstant.MESSAGE_SUCCESS);
+						interestedProfileResponseDto.setStatusCode(200);
+					} else {
+						interestedProfileResponseDto.setMessage(StringConstant.ALREADY_REQUESTED);
+						interestedProfileResponseDto.setStatusCode(401);
+					}
 				} else if (interestedProfileDto.getStatus().equalsIgnoreCase(StringConstant.ACCEPTED_STATUS)) {
-					logger.info("Inside InterestedProfileServiceImpl :showInteres00000000000t" + interestedProfileDto.getProfileId());
+					logger.info("Inside InterestedProfileServiceImpl :showInteres accepted "
+							+ interestedProfileDto.getProfileId());
 
 					interestedProfileResponseDto = new InterestedProfileResponseDto();
-					ProfileMapping profileMapping = profileMappingRepository.getByProfileIdAndAcceptedStatus(
-							interestedProfileDto.getProfileId(), interestedProfileDto.getInterestedProfileId(), StringConstant.INTERESTED_STATUS);
-					profileMapping.setAcceptedStatus(StringConstant.ACCEPTED_STATUS);
-					profileMapping.setAcceptedDate(Utils.getCurrentDate());
-					profileMappingRepository.save(profileMapping);
+					ProfileMapping profileMapping = profileMappingRepository.getByProfileIdAndAcceptedStatusToAccept(
+							interestedProfileDto.getProfileId(), interestedProfileDto.getInterestedProfileId(),
+							StringConstant.INTERESTED_STATUS);
+					if (profileMapping != null) {
+						logger.info("Inside accepted not null " + profileMapping.getProfileMappingId());
 
-					interestedProfileResponseDto.setMessage(StringConstant.MESSAGE_SUCCESS);
-					interestedProfileResponseDto.setStatusCode(201);
+						profileMapping.setAcceptedStatus(StringConstant.ACCEPTED_STATUS);
+						profileMapping.setAcceptedDate(Utils.getCurrentDate());
+						profileMappingRepository.save(profileMapping);
+
+						interestedProfileResponseDto.setMessage(StringConstant.MESSAGE_SUCCESS);
+						interestedProfileResponseDto.setStatusCode(201);
+					} else {
+						interestedProfileResponseDto.setMessage(StringConstant.FAILED);
+						interestedProfileResponseDto.setStatusCode(401);
+					}
 
 				} else {
 					ProfileMapping profileMapping = profileMappingRepository.getByProfileIdAndAcceptedStatus(
@@ -89,7 +110,7 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 					profileMappingRepository.save(profileMapping);
 
 					interestedProfileResponseDto.setMessage(StringConstant.FAILED);
-					interestedProfileResponseDto.setStatusCode(201);
+					interestedProfileResponseDto.setStatusCode(401);
 				}
 			} else {
 				throw new MatrimonyServiceException(StringConstant.PROFILE_NOT_FOUND);
