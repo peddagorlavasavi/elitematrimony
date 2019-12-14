@@ -42,7 +42,7 @@ public class GetStatusControllerTest {
 
 	@Test
 	public void getMyInterestProfilesNegative() {
-		profile.setProfileId(2);
+		profile.setProfileId(null);
 		profilelst.add(profile);
 		Mockito.when(profileMappingService.getMyInterestProfiles(1)).thenReturn(profilelst);
 		HttpStatus statuscode = profileMappingController.getMyInterestProfiles(2).getStatusCode();
@@ -60,7 +60,7 @@ public class GetStatusControllerTest {
 
 	@Test
 	public void getMyMatchingProfilesNegative() {
-		profile.setProfileId(2);
+		profile.setProfileId(null);
 		profilelst.add(profile);
 		Mockito.when(profileMappingService.getAcceptedProfiles(1)).thenReturn(profilelst);
 		HttpStatus statuscode = profileMappingController.getAcceptedProfiles(2).getStatusCode();
