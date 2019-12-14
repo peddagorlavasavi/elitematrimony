@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.strikers.elitematrimony.entity.Profile;
+import com.strikers.elitematrimony.utils.StringConstant;
 
 public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
@@ -73,8 +74,12 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 	 * @param status
 	 * @return list of profile
 	 */
-	@Query(nativeQuery = true, value = "select p.* from profile p where p.profile_id !=:profileId and p.gender !=:gender and p.profile_id not in ( select pm.requested_profile_id from profile_mapping pm where pm.interested_profile_id =:profileId and pm.accepted_status=:status)")
-	List<Profile> getSuggestedProfileList(@Param("profileId") Integer profileId, @Param("gender") String gender,
-			@Param("status") String status);
+	@Query(nativeQuery = true, value = "select p.* from profile p where p.profile_id !=:profileId and p.gender !=:gender"
+			+ " and p.profile_id not in ( select pm.requested_profile_id from profile_mapping pm where pm.interested_profile_id =:profileId and pm.accepted_status='"+StringConstant.NOT_INTERESTED_STATUS+"')"
+			+ " and p.profile_id not in ( select pm.interested_profile_id from profile_mapping pm where pm.requested_profile_id =:profileId and pm.accepted_status='"+StringConstant.INTERESTED_STATUS+"')"
+			+ " and p.profile_id not in ( select pm.requested_profile_id from profile_mapping pm where pm.interested_profile_id =:profileId and pm.accepted_status='"+StringConstant.ACCEPTED_STATUS+"')"
+			+ " and p.profile_id not in ( select pm.interested_profile_id from profile_mapping pm where pm.requested_profile_id =:profileId and pm.accepted_status='"+StringConstant.ACCEPTED_STATUS+"') "
+			+ " order by p.profile_id desc")
+	List<Profile> getSuggestedProfileList(@Param("profileId") Integer profileId, @Param("gender") String gender);
 
 }

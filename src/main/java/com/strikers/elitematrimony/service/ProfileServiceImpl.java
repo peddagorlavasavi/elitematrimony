@@ -136,7 +136,7 @@ public class ProfileServiceImpl implements ProfileService {
 
 		logger.info("showing profiles based on gender ");
 		List<Profile> profileList = profileRepository.getSuggestedProfileList(suggestedListRequestDto.getProfileId(),
-				suggestedListRequestDto.getGender(), StringConstant.NOT_INTERESTED_STATUS);
+				suggestedListRequestDto.getGender());
 
 		List<SuggestedListResponseDto> suggestedListResponseDtos = new ArrayList<>();
 		profileList.forEach(profile -> {
