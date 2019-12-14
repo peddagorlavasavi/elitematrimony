@@ -92,7 +92,7 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 
 						profileMapping.setAcceptedStatus(StringConstant.ACCEPTED_STATUS);
 						profileMapping.setAcceptedDate(Utils.getCurrentDate());
-						
+
 						profileMappingRepository.save(profileMapping);
 
 						interestedProfileResponseDto.setMessage(StringConstant.MESSAGE_SUCCESS);
@@ -105,16 +105,16 @@ public class InterestedProfileServiceImpl implements InterestedProfileService {
 				} else {
 
 					List<ProfileMapping> profileMappings = profileMappingRepository.getByProfileIdAndAcceptedStatus(
-							 interestedProfileDto.getInterestedProfileId(),interestedProfileDto.getProfileId(),
+							interestedProfileDto.getInterestedProfileId(), interestedProfileDto.getProfileId(),
 							StringConstant.INTERESTED_STATUS);
 					interestedProfileResponseDto = new InterestedProfileResponseDto();
-					
+
 					profileMappings.forEach(profileMapping -> {
 						profileMapping.setAcceptedStatus(StringConstant.NOT_INTERESTED_STATUS);
 						profileMapping.setAcceptedDate(Utils.getCurrentDate());
 						profileMappingRepository.save(profileMapping);
 					});
-					
+
 					interestedProfileResponseDto.setMessage(StringConstant.SUCCESS_STATUS);
 					interestedProfileResponseDto.setStatusCode(401);
 				}

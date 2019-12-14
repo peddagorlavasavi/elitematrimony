@@ -29,6 +29,7 @@ import com.strikers.elitematrimony.exception.AgeNotMatchedException;
 import com.strikers.elitematrimony.repository.CityRepository;
 import com.strikers.elitematrimony.repository.LanguageRepository;
 import com.strikers.elitematrimony.repository.ProfileRepository;
+import com.strikers.elitematrimony.utils.Utils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProfileServiceImplTest {
@@ -102,6 +103,10 @@ public class ProfileServiceImplTest {
 		when(profileRepository.save(any())).thenReturn(profile);
 		ProfileResponseDto profileResponseDto = profileService.createProfile(profileRequestDto);
 		assertEquals(200, profileResponseDto.getStatusCode());
+		profile.setAge(Utils.calculateAge(profileRequestDto.getDob()));
+		when(cityRepository.findById(1)).thenReturn(Optional.of(city));
+		profile.setCity(Optional.of(city).get().getCityName());
+		assertNotNull(profile);
 	}
 
 	@Test
@@ -124,7 +129,5 @@ public class ProfileServiceImplTest {
 		when(profileRepository.save(any())).thenReturn(profile);
 
 	}
-
-	
 
 }

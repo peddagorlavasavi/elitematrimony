@@ -37,13 +37,15 @@ public class ProfileController {
 	private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
 	/**
-	 * @description searchProfile is used to search profile based on language,
-	 *              maritalStatus, qualification, profession, hobby or city
+	 * @description searchProfile is used to search profile based on firstname,
+	 *              lastname, language, maritalStatus, qualification, profession,
+	 *              hobby or city
 	 * @param searchKey is used to search the above mentioned field of profile
 	 * @return List<Profile> is the list of profile
 	 */
 	@GetMapping("")
-	public ResponseEntity<List<Profile>> searchProfile(@RequestParam("searchKey") String searchKey, @RequestParam("gender") String gender) {
+	public ResponseEntity<List<Profile>> searchProfile(@RequestParam("searchKey") String searchKey,
+			@RequestParam("gender") String gender) {
 		List<Profile> profiles = profileService.searchProfile(searchKey, gender);
 		if (profiles != null) {
 			logger.info("search result found");
@@ -89,18 +91,18 @@ public class ProfileController {
 	}
 
 	/**
-	 * @author Hema
-	 * listProfile is used to list the profiles based on profileId and gender
+	 * @author Hema listProfile is used to list the profiles based on profileId and
+	 *         gender
 	 * @param suggestedListRequestDto
 	 * @return List<SuggestedListResponseDto>
 	 */
 	@GetMapping("/profileList")
-	public ResponseEntity<List<SuggestedListResponseDto>> listProfile(SuggestedListRequestDto suggestedListRequestDto){
+	public ResponseEntity<List<SuggestedListResponseDto>> listProfile(SuggestedListRequestDto suggestedListRequestDto) {
 		logger.info("Listing the profiles based on gender");
-		List<SuggestedListResponseDto> profileList=profileService.suggestedList(suggestedListRequestDto);
+		List<SuggestedListResponseDto> profileList = profileService.suggestedList(suggestedListRequestDto);
 		if (profileList.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} else { 
+		} else {
 			return new ResponseEntity<>(profileList, HttpStatus.OK);
 		}
 	}

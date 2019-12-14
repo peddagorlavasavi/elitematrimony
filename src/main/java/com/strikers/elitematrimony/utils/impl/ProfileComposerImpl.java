@@ -18,7 +18,7 @@ public class ProfileComposerImpl implements ProfileComposer<List<Object[]>, List
 
 	@Override
 	public List<Profile> compose(List<Object[]> objectList) {
-		List<Profile> profiles = new ArrayList<Profile>();
+		List<Profile> profiles = new ArrayList<>();
 
 		objectList.forEach(object -> {
 

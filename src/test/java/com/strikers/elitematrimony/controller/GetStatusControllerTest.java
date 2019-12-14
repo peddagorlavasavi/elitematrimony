@@ -1,7 +1,6 @@
 package com.strikers.elitematrimony.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +44,9 @@ public class GetStatusControllerTest {
 	public void getMyInterestProfilesNegative() {
 		profile.setProfileId(null);
 		profilelst.add(profile);
-		Mockito.when(profileMappingService.getMyInterestProfiles(null)).thenReturn(profilelst);
-		HttpStatus statuscode = profileMappingController.getMyInterestProfiles(null).getStatusCode();
-		assertNotNull(statuscode);
+		Mockito.when(profileMappingService.getMyInterestProfiles(1)).thenReturn(profilelst);
+		HttpStatus statuscode = profileMappingController.getMyInterestProfiles(2).getStatusCode();
+		assertEquals(HttpStatus.OK, statuscode);
 	}
 
 	@Test
@@ -64,6 +63,7 @@ public class GetStatusControllerTest {
 		profile.setProfileId(null);
 		profilelst.add(profile);
 		Mockito.when(profileMappingService.getAcceptedProfiles(1)).thenReturn(profilelst);
-		HttpStatus statuscode = profileMappingController.getAcceptedProfiles(null).getStatusCode();
-		assertNotNull(statuscode);	}
+		HttpStatus statuscode = profileMappingController.getAcceptedProfiles(2).getStatusCode();
+		assertEquals(HttpStatus.OK, statuscode);
+	}
 }
